@@ -1,0 +1,29 @@
+.car-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 15px;
+    padding: 15px;
+    text-align: center;
+}
+.car-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+.buy-link {
+    color: white;
+    background-color: #007bff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+}
+.buy-link:hover {
+    background-color: green;
+    text-decoration: none;
+    color: white;
+}
+.order-select {
+    margin-bottom: 20px;
+}

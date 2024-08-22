@@ -1,0 +1,58 @@
+h1, p, div {text-align: center;}
+
+.discover {
+    /* Aggiungi qui le tue regole di stile */
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: #007BFF;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.discover:hover {
+    background-color: #0056b3;
+}
+
+
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.car-info {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.car-info h2 {
+    margin-top: 0;
+}
+
+.car-info img {
+    max-width: 100%; 
+    height: auto; 
+    display: block; 
+    border-radius: 5px;
+    margin-bottom: 10px; 
+}
+
+.btn-confirm {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.btn-confirm:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+}

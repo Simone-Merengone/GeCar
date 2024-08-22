@@ -1,0 +1,50 @@
+h1 {text-align: center;} 
+
+div {
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+
+}
+
+.download-link {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px 0;
+    color: #ffffff;
+    background-color: #4CAF50;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.download-link:hover {
+    background-color: #45a049;
+}
+
+.download-link:active {
+    background-color: #39843c;
+}
+
+.delete-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px 0;
+    color: #ffffff;
+    background-color: #f44336; 
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #cc0000;
+}
+
+.delete-btn:active {
+    background-color: #b30000;
+}
+
