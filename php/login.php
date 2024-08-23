@@ -9,7 +9,6 @@
     <?php 
       include_once 'common_layout/navbar.php';  
 
-      //se utente già loggato prova ad accedere
       if(isset($_SESSION['id']) && !empty($_SESSION['id']))
         header("Location: ./logged.php");
 
@@ -43,7 +42,19 @@
               </div>
             </div>
 
-           <br>
+            
+            <br>
+
+            <div class="row">
+              <div class="col-25"></div>
+              <div class="col-75">
+                <label for="remember">
+                  <input type="checkbox" id="remember" name="remember">
+                  Remember me
+                </label>
+              </div>
+            </div>
+            
             <div class="row">
               <input type="submit" value="Submit">
             </div>

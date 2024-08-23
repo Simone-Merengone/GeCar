@@ -9,12 +9,13 @@
 <body>
 
     <?php 
-        include_once 'common_layout/navbar.php';  
+        include_once 'common_layout/navbar.php';
+        
+        include_once './script/common.php';
+
+        check_user_cookie();
 
         if((isset($_SESSION['id']) && !empty($_SESSION['id']))){
-            include_once './script/common.php';
-            
-
             $user = getUserInfo($_SESSION['id']);
 
             if(!empty($user))
