@@ -11,7 +11,6 @@ function banUser($id) {
         $date->modify('+2 days');
         $ban_date = $date->format('Y-m-d');
 
-        // Update the ban date for the user
         $stmt = $conn->prepare("UPDATE user SET ban_date = ? WHERE id = ?");
         $stmt->bind_param("si", $ban_date, $id);
         

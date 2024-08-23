@@ -14,9 +14,9 @@ function log_error($message) {
 
 function connection() {
     $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "carge";
+    $username = "S4984409";
+    $password = "PampuyaFikaleba_007";
+    $dbname = "S4984409";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -46,6 +46,77 @@ function clean_input($data) {
     return $data;
 }
 
+function update_cookie($id, $conn) {
+    $cookie_value = random_bytes(32);
+    $expiration = 86400 * 2;
+    setcookie('user', $cookie_value, time() + $expiration);
+    $cookie_expiration = date('Y-m-d H:i:s', time() + $expiration); 
+
+    $cookie_hash_value = hash("sha256", $cookie_value);
+
+    try{
+        $stmt = $conn->prepare("UPDATE user SET cookie_hash_value=?, cookie_expiration=? WHERE id=?");
+        $stmt->bind_param("ssd", $cookie_hash_value, $cookie_expiration, $id);
+        
+        if(!$stmt->execute())
+            throw new Exception("\$stmt->execute() failure: ");
+
+    }catch(Exception $e){
+        log_error(".php/script/common.php update_cookie() error: " . $e->getMessage());
+    }
+}
+
+function check_user_cookie() {
+    if (isset($_COOKIE['user']) && !empty($_COOKIE['user'])) {
+
+        $cookie_value_received = $_COOKIE['user'];
+        $cookie__hash_value_received = hash("sha256", $cookie_value_received);
+
+        try {
+            $conn = connection();
+
+            if ($conn === false) 
+                return false;
+
+            $stmt = $conn->prepare("SELECT id, cookie_expiration, type FROM user WHERE cookie_hash_value = ?");
+
+            $stmt->bind_param("s", $cookie__hash_value_received);
+            
+            if (!$stmt->execute()) 
+                throw new Exception("\$stmt->execute() failure: " . $stmt->error);
+
+            $stmt->store_result();
+
+            if ($stmt->num_rows > 0) {
+                $stmt->bind_result($id, $cookie_expiration, $u_type);
+                $stmt->fetch();
+
+             if (strtotime($cookie_expiration) > time()) {
+
+                    if (session_status() !== PHP_SESSION_ACTIVE) {
+                        session_start();
+                    }
+
+                    update_cookie($id, $conn);
+
+                    $_SESSION['id'] = $id;
+                    $_SESSION['type'] = $u_type;
+
+                }
+            }
+            $stmt->close();
+            $conn->close();
+
+        } catch (Exception $e) {
+            log_error(".php/script/common.php check_user_cookie() error: " . $e->getMessage());
+            
+            $stmt->close();
+            $conn->close();
+            
+        }
+    }
+}
+
 function getUserInfo($id){
     try {
 
@@ -63,19 +134,15 @@ function getUserInfo($id){
         $result = $stmt->get_result();
         $user = $result->fetch_assoc();
 
-        if($user === null){
+        if($user === null)
             return false;
-        }
         
         return $user;
     } catch (Exception $e) {
         log_error(".php/script/Common.php getUserInfo():" . $e->getMessage());
         
-        if(isset($stmt))
-            $stmt->close();
-
-        if(isset($conn))
-            $conn->close();
+        $stmt->close();
+        $conn->close();
 
         return false;
     }
@@ -84,9 +151,10 @@ function getUserInfo($id){
 function getCarInfo($id){
     try {
         $conn = connection();
-        if($conn === false){
+
+        if($conn === false)
             return false;
-        }
+        
 
         $stmt = $conn->prepare("SELECT id, manufacturer, model, price, year, hp, fuel, gear, color, description, img FROM car WHERE id=?");
         $stmt->bind_param("d", $id);
@@ -97,19 +165,15 @@ function getCarInfo($id){
         $result = $stmt->get_result();
         $car = $result->fetch_assoc(); 
 
-        if($car === null){
+        if($car === null)
             return false;
-        }
         
         return $car;
     } catch (Exception $e) {
         log_error("./php/script/Common.php getCarInfo(): " . $e->getMessage());
         
-        if(isset($stmt))
-            $stmt->close();
-
-        if(isset($conn))
-            $conn->close();
+        $stmt->close();
+        $conn->close();
 
         return false;
     }
@@ -119,9 +183,8 @@ function getUsers(){
     try {
         $conn = connection();
 
-        if ($conn === false) {
+        if ($conn === false)
             return false;
-        }
 
         $stmt = $conn->prepare("SELECT id, firstname, lastname, email, type, ban_date FROM user");
 
@@ -135,19 +198,16 @@ function getUsers(){
             $users[] = $row;
         }
 
-        if (empty($users)) {
-            return "false";
-        }
+        if (empty($users)) 
+            return false;
+        
         
         return $users;
     } catch (Exception $e) {
         log_error(".php/script/common.php getUsers " . $e->getMessage());
         
-        if (isset($stmt))
-            $stmt->close();
-    
-        if (isset($conn))
-            $conn->close();
+        $stmt->close();
+        $conn->close();
 
         return false;
     }

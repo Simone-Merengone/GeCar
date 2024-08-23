@@ -50,7 +50,7 @@ function tokenUpdate($token, $expiry){
     }
 }
 
-function sendmail($token, $email){ 
+function SendPassReset($token, $email){ 
     $mail = require_once 'mailer.php';
 
     $mail->setFrom("GeCarSawProject@gmail.com");
@@ -72,7 +72,7 @@ function sendmail($token, $email){
 
         return $mail;
     } catch (Exception $e) {
-        error_log("./php/script/send-password-reset.php sendmail error: " . $e->getMessage());
+        error_log("./php/script/send-password-reset.php SendPassReset error: " . $e->getMessage());
         return false;
     }
 }
@@ -89,7 +89,7 @@ function passReset(){
         if(!tokenUpdate($token, $expiry))
             return false;
         else{
-            if(sendmail($token, $email))
+            if(SendPassReset($token, $email))
                 return true;
             else
                 return false;
