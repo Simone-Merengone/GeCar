@@ -19,6 +19,16 @@ There are three types of users in the system:
 2. **Editor**: Can insert, update, or delete cars.
 3. **Normal User**: Has only read permissions.
 
+### external_tool
+After downloading the code, don't forget to unzip extarnal_tool.zip. It' contains two libraries: 
+- **fpf**: pdf generator library. It generated the invoices.
+- **PHPmailer**: sending mail. It send mail with code for password update.
+
+### put your info
+read this sub-article and update the following file with your information:
+- **./php/script/common.php**: insert in connection() function your data for access to your sql account 
+- **./php/script/mailer.php**: insert your mail data for access to your mail address
+
 ### Learn More
 
 If you want to learn more about the project, I have created a presentation that explains the database structure and the main functionalities of the website.
