@@ -26,7 +26,7 @@ After downloading the code, don't forget to unzip extarnal_tool.zip. It' contain
 
 ### put your info
 read this sub-article and update the following file with your information:
-- **./php/script/common.php**: insert in connection() function your data for access to your sql account 
+- **./php/script/common.php**: insert in connection() function your data for access to your sql account and database
 - **./php/script/mailer.php**: insert your mail data for access to your mail address
 
 ### Learn More
