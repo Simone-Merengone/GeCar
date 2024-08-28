@@ -35,4 +35,4 @@ If you want to learn more about the project, I have created a presentation that 
 
 ### Feedback
 
-I would really appreciate any comments or suggestions for improvement (please, be kind 😊). Feel free to contact me!
+I would really appreciate any comments or suggestions for improvement (please, be kind 😊). Feel free to contact me at simo.merengone@gmail.com with subject GeCar.
