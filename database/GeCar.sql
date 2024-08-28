@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `S4984409`
+-- Database: `your_db_name`
 --
 
 -- --------------------------------------------------------
@@ -74,15 +74,6 @@ CREATE TABLE `user` (
   `reset_token_expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dump dei dati per la tabella `user`
---
-
-INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `type`, `pass`, `ban_date`, `cookie_hash_value`, `cookie_expiration`, `reset_token_hash`, `reset_token_expires_at`) VALUES
-(53, 'Stefano', 'Merengone', 'ste.merengone@gmail.com', 'editor', '$2y$10$dCpIYI75xrHFEV/auxHNPuh/krR/x44M8FIw3gmow38uLA4imz.xy', NULL, '40052f565bc3c5a77697662dffdaf023406f22d974adfd6c551542cbd34a1648', '2024-08-25', NULL, NULL),
-(55, 'Simone', 'Merengone', 'simo.merengone@gmail.com', 'admin', '$2y$10$IrKPH1TmQi.Lhmq2gS2d.eD5BjOK7LxNEzB029xj6CcMdaJUShBr2', NULL, NULL, NULL, '59b516bd483016b483814acdd85612da714893cb7bfb728295546e649758163f', '2024-08-21 15:37:03'),
-(62, 'Luigi', 'Bros', 'luigi.bros@gmail.com', 'normal', '$2y$10$/EhRANdwJMZXlLaLSLKZC.bhtD0FjKagTecpV0vml4B3DNbk/at5.', NULL, NULL, NULL, NULL, NULL),
-(63, 'Marina', 'Ribaudo', 'marina.ribaudo@gmail.com', 'normal', '$2y$10$UX0fTwEnMAT2BffpauJK6u7i1Rc3EwE.9B6BJSNtJfNw5ocAAONme', NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indici per le tabelle scaricate
