@@ -25,7 +25,7 @@ function db_delite_invoice($path){
         
         return true;
     
-    } catch (Exception $e) { //inserisco il percorso per capire dov'è stato rilevato il problema
+    } catch (Exception $e) { 
         log_error("database/script/delete_invoice.php db_delite_invoice() " . $e->getMessage());
     
         $stmt->close();

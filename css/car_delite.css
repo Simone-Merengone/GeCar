@@ -33,15 +33,15 @@ h1, p, div {text-align: center;}
 }
 
 .btn-modify {
-    background-color: #007bff; /* colore blu di Bootstrap */
+    background-color: #007bff;
 }
 .btn-modify:hover {
-    background-color: blue; /* colore blu scuro al passaggio del mouse */
+    background-color: blue; 
 }
 
 .btn-delete {
-    background-color: #dc3545; /* colore rosso di Bootstrap */
+    background-color: #dc3545;
 }
 .btn-delete:hover {
-    background-color: #c82333; /* colore rosso scuro al passaggio del mouse */
+    background-color: #c82333;
 }

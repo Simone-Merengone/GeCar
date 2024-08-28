@@ -12,14 +12,14 @@ $mail = new PHPMailer(true);
 $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
 
 $mail->isSMTP();                      
-$mail->Host       = 'smtp.gmail.com'; 
+$mail->Host       = 'your_host'; 
 $mail->SMTPAuth   = true; 
 
 $mail->SMTPDebug = 1;
-$mail->Username   = 'GeCarSawProject@gmail.com';
-$mail->Password   = 'evnl tnxp czyj osmu';   
-$mail->SMTPSecure = 'ssl';
-$mail->Port       = 465;  
+$mail->Username   = 'your_username';
+$mail->Password   = 'your_password';   
+$mail->SMTPSecure = 'your_port';
+$mail->Port       = 000;   //insert correct port number
 $mail->isHtml(true); 
 
 return $mail;

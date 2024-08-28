@@ -1,6 +1,11 @@
 <?php
-if(isset($_SESSION['id']) && !empty($_SESSION['id']))
-  header("Location: ./logged.php");
+  include_once './script/common.php';
+
+  if(check_user_cookie())
+    header("Location: ../php/");
+  else if(isset($_SESSION['id']) && !empty($_SESSION['id']))
+    header("Location: ./logged.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -10,9 +15,8 @@ if(isset($_SESSION['id']) && !empty($_SESSION['id']))
     <title>registration</title>
 </head>
 <body>
-    <?php 
-        include_once 'common_layout/navbar.php';  
-    ?>
+
+  <?php include_once 'common_layout/navbar.php';  ?>
 
     <br>
     <h1>Registration Form</h1>

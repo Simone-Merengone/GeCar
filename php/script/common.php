@@ -1,5 +1,9 @@
 <?php
 
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
 function log_error($message) {
 
     $timestamp = date("Y-m-d H:i:s");
@@ -13,10 +17,10 @@ function log_error($message) {
 }
 
 function connection() {
-    $servername = "localhost";
-    $username = "S4984409";
-    $password = "PampuyaFikaleba_007";
-    $dbname = "S4984409";
+    $servername = "your_servername";
+    $username = "your_username";
+    $password = "your_password";
+    $dbname = "your_dbname";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -70,7 +74,7 @@ function check_user_cookie() {
     if (isset($_COOKIE['user']) && !empty($_COOKIE['user'])) {
 
         $cookie_value_received = $_COOKIE['user'];
-        $cookie__hash_value_received = hash("sha256", $cookie_value_received);
+        $cookie_hash_value_received = hash("sha256", $cookie_value_received);
 
         try {
             $conn = connection();
@@ -80,7 +84,7 @@ function check_user_cookie() {
 
             $stmt = $conn->prepare("SELECT id, cookie_expiration, type FROM user WHERE cookie_hash_value = ?");
 
-            $stmt->bind_param("s", $cookie__hash_value_received);
+            $stmt->bind_param("s", $cookie_hash_value_received);
             
             if (!$stmt->execute()) 
                 throw new Exception("\$stmt->execute() failure: " . $stmt->error);
@@ -92,20 +96,23 @@ function check_user_cookie() {
                 $stmt->fetch();
 
              if (strtotime($cookie_expiration) > time()) {
-
-                    if (session_status() !== PHP_SESSION_ACTIVE) {
-                        session_start();
-                    }
-
                     update_cookie($id, $conn);
 
                     $_SESSION['id'] = $id;
                     $_SESSION['type'] = $u_type;
 
                 }
+            }else{
+                $stmt->close();
+                $conn->close();
+
+                return false;
             }
+
             $stmt->close();
             $conn->close();
+
+            return true;
 
         } catch (Exception $e) {
             log_error(".php/script/common.php check_user_cookie() error: " . $e->getMessage());
@@ -113,6 +120,7 @@ function check_user_cookie() {
             $stmt->close();
             $conn->close();
             
+            return false;
         }
     }
 }

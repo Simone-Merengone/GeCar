@@ -107,31 +107,36 @@ function choose_op_car(){
             <h1 class="text-center my-4">Car Catalog</h1>
             <div class="row" id="car-catalog">';
 
-        foreach ($cars as $car) {
-            echo '<div class="col-md-4">
-                    <div class="car-card">
-                        <img src="../images/' . $car["img"] . '" alt="' . $car["model"] . '">
-                        <h3>' . $car["manufacturer"] . ' ' . $car["model"] . '</h3>
-                        <p>Price: $' . $car["price"] . '</p>
-                        <p>Year: ' . $car["year"] . '</p>
-                        <p>Fuel: ' . $car["fuel"] . '</p>
-                        <p>Gear: ' . $car["gear"] . '</p>
-                        <p>Color: ' . $car["color"] . '</p>
-                        <div class="button-container">
-                            <form action="car_modify_form.php" method="post">
-                                <input type="hidden" name="car_id" value="' . $car["id"] . '">
-                                <button type="submit" class="btn-modify">Modify</button>
-                            </form>
-                            <form action="./car_delite_result.php" method="post" style="margin-top: 10px;">
-                                <input type="hidden" name="car_id" value="' . $car["id"] . '">
-                                <button type="submit" class="btn-delete">Delite</button>
-                            </form>
+        if (empty($cars)) {
+            echo '<div class="col-12">
+                    <p class="text-center">No cars found with the specified criteria.</p>
+                  </div>';
+        } else {
+            foreach ($cars as $car) {
+                echo '<div class="col-md-4">
+                        <div class="car-card">
+                            <img src="../images/' . $car["img"] . '" alt="' . $car["model"] . '">
+                            <h3>' . $car["manufacturer"] . ' ' . $car["model"] . '</h3>
+                            <p>Price: $' . $car["price"] . '</p>
+                            <p>Year: ' . $car["year"] . '</p>
+                            <p>Fuel: ' . $car["fuel"] . '</p>
+                            <p>Gear: ' . $car["gear"] . '</p>
+                            <p>Color: ' . $car["color"] . '</p>
+                            <div class="button-container">
+                                <form action="car_modify_form.php" method="post">
+                                    <input type="hidden" name="car_id" value="' . $car["id"] . '">
+                                    <button type="submit" class="btn-modify">Modify</button>
+                                </form>
+                                <form action="./car_delite_result.php" method="post" style="margin-top: 10px;">
+                                    <input type="hidden" name="car_id" value="' . $car["id"] . '">
+                                    <button type="submit" class="btn-delete">Delete</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                </div>';
+                    </div>';
+            }
         }
 
         echo '</div></div>';
-
     }
 }
