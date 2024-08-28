@@ -1,3 +1,8 @@
+<?php 
+        include_once './script/common.php';
+        check_user_cookie();
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 

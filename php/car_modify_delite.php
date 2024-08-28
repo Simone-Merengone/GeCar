@@ -28,7 +28,7 @@ if( (!isset($_SESSION['id']) || empty($_SESSION['id']))|| ($_SESSION["type"] ===
 
     <br>    
 
-    <h1> Ricerca un'auto da eliminare</h1>
+    <h1> Find a car to delete/modify</h1>
 
     <br>
 

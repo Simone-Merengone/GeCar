@@ -3,7 +3,6 @@
         session_start();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,9 +39,6 @@
 
         ?>
         
-
-
-            
             <li><a href="./AboutUs.php">About us</a></li>
             <li><a href="./Policy.php">Policy</a></li>
         </ul>

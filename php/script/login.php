@@ -1,7 +1,6 @@
 <?php
 include_once 'common.php';
 
-
 function ValidationAndClean($email, $pass){
     if( filter_var($email, FILTER_VALIDATE_EMAIL) && validate_input($pass, "/^[a-zA-Z0-9!@#$%^&*()_+=]*$/", 50, 7)){
         $user = [];
@@ -122,9 +121,8 @@ function Login(){
                 if($user){
 
 
-                    if(isset($_POST["remember"])){
+                    if(isset($_POST["remember"]))
                         cookie_creation($_POST["email"]);
-                    }
 
                     if(session_status() !== PHP_SESSION_ACTIVE) 
                         session_start();

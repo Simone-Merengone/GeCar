@@ -81,8 +81,6 @@
     </script>
 </head>
 <body>
-
-
                 <div class="form-group">
                     <select name="manufacturer" id="manufacturer">
                         <option value="">manufacturer</option>

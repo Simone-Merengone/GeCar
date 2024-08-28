@@ -10,7 +10,7 @@ h1{
   
   
   input[type=text], select, textarea {
-    width: calc(100% - 12px); /* Larghezza meno il padding */
+    width: calc(100% - 12px);
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -20,7 +20,7 @@ h1{
   
 
   input[type=email], select, textarea {
-    width: calc(100% - 12px); /* Larghezza meno il padding */
+    width: calc(100% - 12px);
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -29,7 +29,7 @@ h1{
   }
 
   input[type=password], select, textarea {
-    width: calc(100% - 12px); /* Larghezza meno il padding */
+    width: calc(100% - 12px);
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;

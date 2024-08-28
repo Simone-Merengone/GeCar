@@ -1,7 +1,6 @@
 h1, p, div {text-align: center;}
 
 .discover {
-    /* Aggiungi qui le tue regole di stile */
     display: inline-block;
     padding: 10px 20px;
     color: white;

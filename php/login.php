@@ -1,3 +1,12 @@
+<?php 
+  include_once './script/common.php';
+
+  if(check_user_cookie())
+    header("Location: ../php/");
+  else if(isset($_SESSION['id']) && !empty($_SESSION['id']))
+    header("Location: ./logged.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,16 +15,9 @@
 
 </head>
 <body>
-    <?php 
-      include_once 'common_layout/navbar.php';  
-
-      if(isset($_SESSION['id']) && !empty($_SESSION['id']))
-        header("Location: ./logged.php");
-
-    ?>
+    <?php include_once 'common_layout/navbar.php';  ?>
 
     <br>
-
 
     <div class="dist">
       <h1>login Form</h1>

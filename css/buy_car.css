@@ -1,7 +1,8 @@
-h1, p, div {text-align: center;}
+h1, p, div {
+    text-align: center;
+}
 
 .discover {
-    /* Aggiungi qui le tue regole di stile */
     display: inline-block;
     padding: 10px 20px;
     color: white;
@@ -14,8 +15,6 @@ h1, p, div {text-align: center;}
 .discover:hover {
     background-color: #0056b3;
 }
-
-
 
 .container {
     max-width: 800px;
@@ -34,12 +33,41 @@ h1, p, div {text-align: center;}
     margin-top: 0;
 }
 
+
 .car-info img {
     max-width: 100%; 
-    height: auto; 
-    display: block; 
+    max-height: 400px; 
+    width: auto;      
+    height: auto;   
+    display: block;
+    margin: 0 auto 10px;
     border-radius: 5px;
-    margin-bottom: 10px; 
+}
+
+@media (max-width: 1024px) {
+    .car-info img {
+        max-height: 350px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .car-info img {
+        max-height: 300px; 
+    }
+}
+
+@media (max-width: 576px) {
+    .car-info img {
+        max-height: 250px;
+    }
+}
+
+
+@media (max-width: 400px) {
+    .car-info img {
+        max-height: 200px; 
+    }
 }
 
 .btn-confirm {
