@@ -9,7 +9,7 @@ In this website, users can:
 - **Buy cars**  
 - **Download or delete invoices**  
 - **Manage user with ban or delete**  
-- And other simple but well-implemented functionalities...
+- And other simple functionalities...
 
 ### User Roles
 
