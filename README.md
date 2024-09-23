@@ -1,6 +1,5 @@
 # ATTENCTION
 ### I found two big problems and these are the solutions:
-- I have to put user control in the admin script
 - I have to create an HTaccess file in the directory that contains the invoices
 # I will update it after 20/09/2024
 
