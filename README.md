@@ -29,6 +29,9 @@ read this sub-article and update the following file with your information:
 - **./php/script/common.php**: insert in connection() function your data for access to your sql account and database
 - **./php/script/mailer.php**: insert your mail data for access to your mail address
 
+### security change
+You have to change the **./user_invoices/.htaccess** and set username and password for protect the user's inoivoices
+
 ### Learn More
 
 If you want to learn more about the project, I have created a presentation that explains the database structure and the main functionalities of the website.
