@@ -1,6 +1,9 @@
-<?php
 
+<?php
 include_once 'common.php';
+
+if( (!isset($_SESSION['id']) || empty($_SESSION['id']))|| ($_SESSION["type"] === "normal") )
+    header("Location: ./access_denied.php");
 
 function move_img($file_extension, $upload_dir, $file_img_tmp_name){
     $unique_id = uniqid();
@@ -201,6 +204,8 @@ function db_insert($car) {
         return false;
     }
 }
+
+
 function car_insert(){
 
     $car = clean_and_validate_data();

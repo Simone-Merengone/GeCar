@@ -1,6 +1,8 @@
 <?php
-
 include_once 'common.php';
+
+if( (!isset($_SESSION['id']) || empty($_SESSION['id']))|| ($_SESSION["type"] === "normal") )
+    header("Location: ./access_denied.php");
 
 function delete_car_img($img_name) {
     $img_location = '../images/' . $img_name;

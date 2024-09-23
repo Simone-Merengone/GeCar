@@ -1,12 +1,6 @@
 <?php
-
-
 include_once 'common.php';
 include_once('../../external_tool/fpdf186/fpdf.php');
-
-
-if(session_status() !== PHP_SESSION_ACTIVE) 
-    session_start();
 
 
 define('EURO',chr(128));

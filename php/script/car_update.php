@@ -1,20 +1,19 @@
 <?php
 include_once 'common.php';
 
-function delite_old_image($old_img){
+function delite_old_image($old_img) {
     $old_img_path = '../images/' . $old_img;
-    if(file_exists($old_img_path))
-        if(!unlink($old_img_path)){
-            log_error("./php/script/car_update.php unlink(): error impossible delite file");
-        }else
+    if (file_exists($old_img_path)) {
+        if (!unlink($old_img_path)) {
+            log_error("./php/script/car_update.php unlink(): error, impossible to delete file");
+        } else {
             return '../images/';
-
-
+        }
+    }
     return false;
 }
 
-
-function move_img($file_extension, $upload_dir, $file_img_tmp_name){
+function move_img($file_extension, $upload_dir, $file_img_tmp_name) {
     $unique_id = uniqid();
     $unique_filename = $unique_id . '.' . $file_extension;
     $upload_file = $upload_dir . $unique_filename;
@@ -34,113 +33,106 @@ function clean_and_validate_data() {
     $regex_description = '/[a-zA-Z0-9,!.]/';
 
     $car = [];
+    
 
     // ID
-    if (!isset($_POST['id'])) {
-        echo "<div class='error'>ID is not set</div><br>";
-        return false;
+    if (!isset($_POST['car_id']) || empty($_POST['car_id'])) {
+        echo "<div class='error'>Car ID is missing or empty</div>";
+    } else {
+        $car['id'] = clean_input($_POST['car_id']);
     }
-    $car['id'] = $_POST['id'];
 
     // Manufacturer
-    if (!validate_input($_POST['manufacturer'], $regex_string, 50, 1)) {
-        echo "<div class='error'>Manufacturer validation failed</div><br>";
-        return false;
+    if (isset($_POST['manufacturer']) && validate_input($_POST['manufacturer'], $regex_string, 50, 1)) {
+        $car['manufacturer'] = clean_input($_POST['manufacturer']);
+    } else {
+        echo "<div class='error'>Manufacturer is invalid or empty. Must be between 1 and 50 characters</div>";
     }
-    $car['manufacturer'] = clean_input($_POST['manufacturer']);
 
     // Model
-    if (!validate_input($_POST['model'], $regex_string, 50, 1)) {
-        echo "<div class='error'>Model validation failed</div><br>";
-        return false;
+    if (isset($_POST['model']) && validate_input($_POST['model'], $regex_string, 50, 1)) {
+        $car['model'] = clean_input($_POST['model']);
+    } else {
+        echo "<div class='error'>Model is invalid or empty. Must be between 1 and 50 characters</div>";
     }
-    $car['model'] = clean_input($_POST['model']);
 
     // Price
-    if (!validate_input($_POST['price'], $regex_number, 10, 1)) {
-        echo "<div class='error'>Price validation failed</div><br>";
-        return false;
+    if (isset($_POST['price']) && validate_input($_POST['price'], $regex_number, 10, 1)) {
+        $car['price'] = clean_input($_POST['price']);
+    } else {
+        echo "<div class='error'>Price is invalid or empty. Must be a valid number</div>";
     }
-    $car['price'] = clean_input($_POST['price']);
 
     // Year
     $min_year = 1950; 
     $max_year = date('Y');
-
     $year = (int)$_POST['year'];
 
-    if (!validate_input($_POST['year'], $regex_year, 4, 4) || $year < $min_year || $year > $max_year) {
-        echo "<div class='error'>Year validation failed: year is $year (must be between $min_year and $max_year)</div><br>";
-        return false;
+    if (isset($_POST['year']) && validate_input($_POST['year'], $regex_year, 4, 4) && $year >= $min_year && $year <= $max_year) {
+        $car['year'] = clean_input($_POST['year']);
+    } else {
+        echo "<div class='error'>Year is invalid. Must be a 4-digit year between $min_year and $max_year</div>";
     }
-
-    $car['year'] = clean_input($_POST['year']);
 
     // Horsepower
-    if (!validate_input($_POST['hp'], $regex_hp, 4, 1)) {
-        echo "<div class='error'>Horsepower validation failed</div><br>";
-        return false;
+    if (isset($_POST['hp']) && validate_input($_POST['hp'], $regex_hp, 4, 1)) {
+        $car['hp'] = clean_input($_POST['hp']);
+    } else {
+        echo "<div class='error'>Horsepower is invalid or empty. Must be a valid number</div>";
     }
-    $car['hp'] = clean_input($_POST['hp']);
 
     // Fuel
     $allowed_fuel = ['gasoline', 'diesel', 'electric', 'hybrid'];
-    if (!in_array($_POST['fuel'], $allowed_fuel)) {
-        echo "<div class='error'>Fuel validation failed</div><br>";
-        return false;
+    if (isset($_POST['fuel']) && in_array($_POST['fuel'], $allowed_fuel)) {
+        $car['fuel'] = clean_input($_POST['fuel']);
+    } else {
+        echo "<div class='error'>Fuel type is invalid. Must be one of: gasoline, diesel, electric, hybrid</div>";
     }
-    $car['fuel'] = clean_input($_POST['fuel']);
 
     // Gear
     $allowed_gear = ['automatic', 'manual', 'semi-automatic'];
-    if (!in_array($_POST['gear'], $allowed_gear)) {
-        echo "<div class='error'>Gear validation failed</div><br>";
-        return false;
+    if (isset($_POST['gear']) && in_array($_POST['gear'], $allowed_gear)) {
+        $car['gear'] = clean_input($_POST['gear']);
+    } else {
+        echo "<div class='error'>Gear type is invalid. Must be one of: automatic, manual, semi-automatic</div>";
     }
-    $car['gear'] = clean_input($_POST['gear']);
 
     // Color
     $allowed_color = ['black', 'grey', 'white', 'red', 'green', 'orange', 'yellow'];
-    if (!in_array($_POST['color'], $allowed_color)) {
-        echo "<div class='error'>Color validation failed</div><br>";
-        return false;
+    if (isset($_POST['color']) && in_array($_POST['color'], $allowed_color)) {
+        $car['color'] = clean_input($_POST['color']);
+    } else {
+        echo "<div class='error'>Color is invalid. Must be one of: black, grey, white, red, green, orange, yellow</div>";
     }
-    $car['color'] = clean_input($_POST['color']);
 
     // Description
-    if (!validate_input($_POST['description'], $regex_description, 100, 0)) {
-        echo "<div class='error'>Description validation failed</div><br>";
-        return false;
+    if (isset($_POST['description']) && validate_input($_POST['description'], $regex_description, 100, 0)) {
+        $car['description'] = clean_input($_POST['description']);
+    } else {
+        echo "<div class='error'>Description is invalid or empty. Must be up to 100 characters long</div>";
     }
-    $car['description'] = clean_input($_POST['description']);
 
     // Image
     if (isset($_FILES['img']) && $_FILES['img']['error'] == 0) {
-        echo "<div class='error'>Image file detected</div><br>";
         $allowed_extensions = ['jpg', 'jpeg', 'png'];
         $file_extension = strtolower(pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION));
 
         if (!in_array($file_extension, $allowed_extensions)) {
-            echo "<div class='error'>Image extension not valid: $file_extension</div><br>";
-            return false;
+            echo "<div class='error'>Invalid image format. Allowed formats are: jpg, jpeg, png</div>";
         } else {
             $filename = basename($_FILES['img']['name']);
 
             if (strlen($filename) > 100 || strlen($filename) < 1) {
-                echo "<div class='error'>File name not valid: $filename</div><br>";
-                return false;
+                echo "<div class='error'>Image filename is too long or empty. Must be less than 100 characters</div>";
             } else {
                 $upload_dir = delite_old_image(getCarInfo($car['id'])['img']);
-                if(!$upload_dir){
-                    echo "<div class='error'>Error deleting old image</div><br>";
-                    return false;
-                }
-
-                $car['img'] = move_img($file_extension, $upload_dir, $_FILES['img']['tmp_name']);
-
-                if(!$car['img']) {
-                    echo "<div class='error'>Error moving new image</div><br>";
-                    return false;
+                if (!$upload_dir) {
+                    echo "<div class='error'>Unable to delete old image</div>";
+                } else {
+                    $car['img'] = move_img($file_extension, $upload_dir, $_FILES['img']['tmp_name']);
+                    if (!$car['img']) {
+                        echo "<div class='error'>Failed to move uploaded image</div>";
+                    }
                 }
             }
         }
@@ -152,8 +144,9 @@ function clean_and_validate_data() {
 function db_update($car) {
     $conn = connection();
 
-    if ($conn === false)
+    if ($conn === false) {
         return false;
+    }
 
     try {
         $image = isset($car['img']) ? $car['img'] : null;
@@ -223,29 +216,29 @@ function db_update($car) {
     } catch (Exception $e) {
         log_error("./php/script/car_update.php db_update(): " . $e->getMessage());
 
-        if (isset($stmt))
+        if (isset($stmt)) {
             $stmt->close();
+        }
 
-        if (isset($conn))
+        if (isset($conn)) {
             $conn->close();
+        }
 
         return false;
     }
 }
 
-function car_update(){
+function car_update() {
+    $car = clean_and_validate_data();
+    if ($car === false) {
+        echo "<div class='error'>Validation failed. Please try with valid input</div>";
+        return false;
+    }
 
-        $car = clean_and_validate_data();
-        if($car != false) {
-            if(db_update($car))
-                return true;
-            else{
-                echo "<div class='error'>Change at least one piece of data!!! They are the same </div>";
-                return false;
-            }            
-        }else{
-            echo "<div class='error'>try with other input</div>";
-            return false;
-        }         
+    if (db_update($car)) {
+        return true;
+    } else {
+        echo "<div class='error'>Change at least one piece of data! No changes were detected</div>";
+        return false;
+    }
 }
-

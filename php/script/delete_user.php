@@ -1,6 +1,9 @@
 <?php
 include_once 'common.php';
 
+if( (!isset($_SESSION['id']) || empty($_SESSION['id'])) || ($_SESSION["type"] === "normal") || ($_SESSION["type"] === "editor") )
+    header("Location: ./access_denied.php");
+
 function db_delete_user($user_id) {   
     try {
         $conn = connection();
